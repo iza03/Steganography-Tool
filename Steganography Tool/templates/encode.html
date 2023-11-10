@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Steganography</title>
+    <style>
+        /* CSS styles for the page layout and appearance */
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            background-color: lightblue;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .site-header {
+            background-color: lightpink;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .site-header nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .site-header nav li {
+            margin-right: 20px;
+            font-size: 20px;
+        }
+
+        .site-header nav li a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form label {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 25px;
+        }
+
+        form textarea {
+            margin: 10px;
+            width: 300px;
+            height: 100px;
+        }
+
+        form button {
+            margin-top: 10px;
+            width: 150px;
+            height: 50px;
+            font-size: 25px;
+        }
+
+        .custom-file-input {
+            display: none;
+        }
+
+        .custom-file-label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ddd;
+            border-radius: 5px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .custom-file-label:hover {
+            background-color: #ccc;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: -70px;
+            position: relative;
+            bottom: 150px;
+        }
+
+        .input-container label,
+        .input-container input[type="file"],
+        .input-container textarea {
+            margin: 0 5px;
+        }
+
+        .custom-file-label {
+            margin-bottom: 30px;
+        }
+
+        .custom-file-input {
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Site header -->
+    <header class="site-header">
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Menu</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('encode') }}">Encode</a></li>
+                <li><a href="{{ url_for('decode') }}">Decode</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page content -->
+    <h1>Encode Message</h1>
+
+    <!-- Form for encoding message -->
+    <form action="{{ url_for('encode') }}" method="POST" enctype="multipart/form-data">
+        <div class="input-container">
+            <!-- Label for selecting an image -->
+            <label for="image" style="margin-bottom: 20px;">Select Image:</label>
+
+            <!-- Custom file input button for choosing a file -->
+            <label for="custom-file" class="custom-file-label">Choose File</label>
+            <input type="file" name="image" id="custom-file" class="custom-file-input" accept="image/*" required>
+
+            <!-- Label for entering the message -->
+            <label for="message" style="margin-top: 30px;margin-bottom: 20px;">Enter Message:</label>
+            <textarea name="message" id="message" required></textarea>
+
+            <!-- Submit button -->
+            <button type="submit">Encode</button>
+        </div>
+    </form>
+
+    <!-- JavaScript code to update the file label text -->
+    <script>
+        const fileInput = document.getElementById('custom-file');
+        const fileLabel = document.querySelector('.custom-file-label');
+
+        fileInput.addEventListener('change', (e) => {
+            const fileName = e.target.files[0].name;
+            fileLabel.textContent = fileName;
+        });
+    </script>
+</body>
+
+</html>

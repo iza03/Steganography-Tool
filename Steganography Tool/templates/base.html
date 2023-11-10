@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <!-- Home link -->
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <!-- Encode link -->
+            <li><a href="{{ url_for('encode') }}">Encode</a></li>
+            <!-- Decode link -->
+            <li><a href="{{ url_for('decode') }}">Decode</a></li>
+        </ul>
+    </nav>
+
+    <!-- Content section -->
+    <div class="content">
+        <!-- Content block -->
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
